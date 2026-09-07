@@ -1,5 +1,11 @@
 # @soppy-slidev/shared
 
+## 0.1.1
+
+### Patch Changes
+
+- [`b0bd5b3`](https://github.com/soppylzz/soppy-slidev/commit/b0bd5b3173c1df9b70188ba37e67752523e4c884) Thanks [@soppylzz](https://github.com/soppylzz)! - Add English package READMEs for `shared`, `addon` and `cqupt` (shipped on each package's npm listing).
+
 ## 0.1.0
 
 ### Minor Changes
