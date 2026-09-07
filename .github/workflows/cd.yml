@@ -1,0 +1,77 @@
+name: CD
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cd-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Publish the addon / theme packages with changesets when a version bump is due.
+  # Packages ship as raw TS/Vue source — no build step, publish as-is.
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - run: pnpm install --frozen-lockfile
+
+      # Creates a versioning PR when changesets exist, and runs `publish` after
+      # the bump lands; without pending changesets it is a no-op.
+      - name: Release
+        uses: changesets/action@v1
+        with:
+          version: pnpm version
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  # Build the cqupt play deck and publish it to the custom-domain GitHub Pages.
+  deploy-pages:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build:cqupt
+
+      # custom domain on the repo Pages: deploy to the domain root, so Slidev's
+      # default base "/" and its absolute asset paths stay correct
+      - name: Write CNAME
+        run: echo "cqupt.soppylzz.com" > plays/cqupt/dist/CNAME
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: plays/cqupt/dist
+          publish_branch: gh-pages
