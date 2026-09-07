@@ -1,0 +1,5 @@
+# pnpm v10+ deprecated the "pnpm" field in package.json
+# all package-manager config now lives here (.pnpmrc.yaml)
+# note: `.npmrc` is treated as Properties, this file are treated as YAML
+overrides:
+  vite: "catalog:"

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit",
+      "Write",
+      "WebFetch",
+      "Bash(git:*)",
+      "Bash(tsc:*)",
+      "Bash(node:*)",
+      "Bash(npx:*)",
+      "Bash(pnpm:*)"
+    ],
+    "ask": ["Bash(git push:*)", "Bash(git commit *)"],
+    "deny": [
+      "Edit(./.env*)",
+      "Bash(rm -rf:*)",
+      "Bash(npm publish:*)",
+      "Read(./.env*)",
+      "Read(./**/.env*)",
+      "Read(./secrets/**)"
+    ],
+    "defaultMode": "auto"
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "claudeMdExcludes": ["**/dist/CLAUDE.md", "**/node_modules/**/CLAUDE.md"],
+  "cleanupPeriodDays": 30
+}

@@ -1,0 +1,24 @@
+{
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.suggest.autoImports": true,
+
+  "vscode-edge-devtools.webhint": false,
+  "json.schemaDownload.enable": true,
+  "json.schemaDownload.trustedDomains": {
+    "https://unpkg.com/": true
+  },
+
+  "files.associations": {
+    ".pnpmrc": "yaml",
+    "*.css": "postcss"
+  },
+
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "prettier.requireConfig": true,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "vue.format.style.enabled": false,
+  "vue.format.template.enabled": false,
+  "vue.format.script.enabled": false
+}

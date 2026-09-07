@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
+  "baseBranch": "main",
+  "access": "public",
+  "format": "auto",
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "soppylzz/soppy-slidev"
+    }
+  ],
+  "commit": true,
+  "linked": [["@soppy-slidev/cqupt", "@soppy-slidev/shared", "@soppy-slidev/addon"]],
+  "updateInternalDependencies": "patch"
+}

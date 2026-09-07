@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "semi": false,
+  "tabWidth": 2,
+  "printWidth": 100,
+  "singleQuote": false,
+  "trailingComma": "es5",
+  "overrides": [
+    {
+      "files": "**/*.md",
+      "options": {
+        "parser": "markdown",
+        "proseWrap": "never"
+      }
+    },
+    {
+      "files": ["plays/**/*.md"],
+      "excludeFiles": ["plays/**/node_modules/**"],
+      "options": {
+        "parser": "slidev",
+        "plugins": ["prettier-plugin-slidev"]
+      }
+    },
+    {
+      "files": [".prettierrc"],
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": [".pnpmrc"],
+      "options": {
+        "parser": "yaml"
+      }
+    }
+  ]
+}

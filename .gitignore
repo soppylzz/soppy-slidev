@@ -1,0 +1,29 @@
+# os
+.DS_Store
+Thumbs.db
+
+# ide
+.idea
+
+# pkg
+node_modules
+pnpm-debug.log*
+
+# artifacts
+dist
+*.tsbuildinfo
+
+# agent
+*.temp.md
+.playwright-mcp
+
+# misc
+*.local
+.vite-inspect
+.remote-assets
+components.d.ts
+
+# secrets
+.env
+.env.*
+!.env.example

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedDeclarations": false,
+    "forceConsistentCasingInFileNames": true,
+    /* =============== dev support =============== */
+    "lib": ["dom", "esnext"],
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@soppy-slidev/shared": ["./packages/shared"]
+    }
+  },
+  "include": ["packages/**/*", "plays/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
