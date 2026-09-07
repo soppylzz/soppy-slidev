@@ -1,0 +1,39 @@
+{
+  "name": "@soppy-slidev/cqupt",
+  "version": "0.0.0",
+  "type": "module",
+  "keywords": [
+    "slidev-theme",
+    "slidev"
+  ],
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "slidev": {
+    "defaults": {
+      "fonts": {
+        "sans": "LXGW WenKai Screen",
+        "serif": "Noto Serif SC",
+        "mono": "Fira Code",
+        "provider": "none"
+      }
+    }
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "@maptiler/sdk": "^3.2.3",
+    "@maptiler/leaflet-maptilersdk": "^4.1.1",
+    "@soppy-slidev/shared": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "@unhead/vue": "catalog:",
+    "pinia": "catalog:"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.16"
+  },
+  "peerDependencies": {
+    "@slidev/cli": "catalog:",
+    "@slidev/types": "catalog:",
+    "@slidev/client": "catalog:"
+  }
+}
