@@ -99,18 +99,17 @@ jobs:
         run: pnpm install
 
       - name: Release
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          branch: main
-          title: "Changesets"
-          commit: "chore: version packages [changesets]"
-          version: pnpm run version
-          publish: pnpm run release
-          commitMode: "github-api"
+          pr-title: "Changesets"
+          commit-message: "chore: version packages [changesets]"
+          version-script: pnpm run version
+          publish-script: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # changesets tags releases only in the runner — push the tags to the repo
+      # changesets/action@v2 creates tags/releases through the GitHub API; pushing
+      # the runner's local tags is a fallback in case that path is skipped.
       - name: Push release tags
         run: git push origin --tags
