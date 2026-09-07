@@ -42,12 +42,12 @@ clicks: 3
   >
     <div v-map="{ lat: 29.53, lon: 106.61, range: [11, 17] }">
       <div class="w-44 h-32">
-        <Photo padding="0.35rem" rotate="-10" src="/assets/cqupt.jpg" caption="CQUPT" fit="cover" />
+        <Photo padding="0.35rem" rotate="-10" src="/cqupt.jpg" caption="CQUPT" fit="cover" />
       </div>
     </div>
     <div v-map="{ lat: 29.57, lon: 106.55, range: [11, 17] }">
       <div class="w-44 h-32">
-        <Picture rotate="12" src="/assets/ciqikou.jpg" caption="Ciqikou" fit="cover" />
+        <Picture rotate="12" src="/ciqikou.jpg" caption="Ciqikou" fit="cover" />
       </div>
     </div>
     <div v-map="{ lat: 29.55, lon: 106.63, range: [11, 17] }">

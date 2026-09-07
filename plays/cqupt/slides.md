@@ -1,6 +1,6 @@
 ---
 theme: "@soppy-slidev/cqupt"
-title: "@soppy-slidev/cqupt playground"
+title: "@soppy-slidev/cqupt"
 addons:
   - "@soppy-slidev/addon"
 themeConfig:
@@ -8,6 +8,7 @@ themeConfig:
   order: arabic
   progress: bottom
 src: ./cover.md
+favicon: /favicon.png
 ---
 
 ---
