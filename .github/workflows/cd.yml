@@ -15,9 +15,10 @@ permissions:
 
 jobs:
   # Publish the addon / theme / shared packages with changesets when a version
-  # bump is due. Packages ship as raw TS/Vue source — no build step.
+  # bump is due. Manual only — run the workflow from the Actions tab on main.
+  # Packages ship as raw TS/Vue source — no build step.
   publish:
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -58,7 +59,7 @@ jobs:
   # The repo Pages source is "GitHub Actions", so the deploy goes through the
   # official deploy-pages action — a push to a gh-pages branch is ignored there.
   deploy-pages:
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     permissions:
