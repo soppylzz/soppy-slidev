@@ -1,5 +1,13 @@
 # @soppy-slidev/cqupt
 
+## 0.1.2
+
+### Patch Changes
+
+- [`51c89e7`](https://github.com/soppylzz/soppy-slidev/commit/51c89e7d79ed8665ea9ebd609f1f9ba98b1c1b95) Thanks [@soppylzz](https://github.com/soppylzz)! - Add `description`, `repository`, `author` and `license` fields to the package manifests (npm listing metadata).
+- Updated dependencies [[`51c89e7`](https://github.com/soppylzz/soppy-slidev/commit/51c89e7d79ed8665ea9ebd609f1f9ba98b1c1b95)]:
+  - @soppy-slidev/shared@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

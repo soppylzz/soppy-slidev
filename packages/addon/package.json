@@ -1,6 +1,6 @@
 {
   "name": "@soppy-slidev/addon",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "description": "Soppy component and layout system for Slidev.",
   "repository": {
