@@ -2,6 +2,14 @@
   "name": "@soppy-slidev/cqupt",
   "version": "0.1.1",
   "type": "module",
+  "description": "CQUPT-branded Slidev theme built on the soppy addon.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soppylzz/soppy-slidev.git",
+    "directory": "packages/cqupt"
+  },
+  "author": "soppylzz",
+  "license": "MIT",
   "keywords": [
     "slidev-theme",
     "slidev"

@@ -2,6 +2,14 @@
   "name": "@soppy-slidev/addon",
   "version": "0.1.1",
   "type": "module",
+  "description": "Soppy component and layout system for Slidev.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soppylzz/soppy-slidev.git",
+    "directory": "packages/addon"
+  },
+  "author": "soppylzz",
+  "license": "MIT",
   "dependencies": {
     "@soppy-slidev/shared": "workspace:*",
     "@vueuse/core": "catalog:",
