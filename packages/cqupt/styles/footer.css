@@ -1,0 +1,45 @@
+/* a plain footer strip of fixed height — absolute placement is left to the
+   host (e.g. cover); box-sizing keeps the inline height the total */
+.cqupt-footer {
+  @apply flex items-center justify-between overflow-hidden gap-1.5rem;
+  padding-inline: var(--soppy-inline-pad);
+  box-sizing: border-box;
+  color: var(--soppy-text-secondary);
+  font-family: var(--soppy-font-serif);
+  font-size: var(--soppy-font-size-sm);
+  background: color-mix(in srgb, var(--soppy-bg-raised) 72%, transparent);
+  border-top: 1px solid var(--soppy-border);
+
+  .cqupt-footer__items {
+    display: grid;
+    grid-template-columns: repeat(var(--cqupt-footer-cols, 2), auto);
+    justify-content: start;
+    align-items: center;
+    column-gap: 2rem;
+    row-gap: 0.4rem;
+  }
+
+  .cqupt-footer__item {
+    @apply inline-flex items-center;
+    gap: 0.35rem;
+  }
+
+  .cqupt-footer__icon {
+    width: 1.1em;
+    height: 1.1em;
+    fill: currentColor;
+  }
+
+  .cqupt-footer__label {
+    color: var(--soppy-text-tertiary);
+    font-size: 0.85em;
+  }
+
+  .cqupt-footer__value {
+    font-size: 0.75em;
+  }
+
+  .cqupt-footer__badge {
+    @apply shrink-0;
+  }
+}

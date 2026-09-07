@@ -1,0 +1,45 @@
+/* newsprint-style table of contents: serif lines with hairline rules; the
+   active section stands out through colour, weight and a bigger scale instead
+   of a filled highlight */
+.cqupt-overview {
+  @apply flex h-full w-full flex-col justify-center overflow-hidden;
+  padding-block: 1rem;
+  font-family: var(--soppy-font-serif);
+
+  .cqupt-overview__item {
+    @apply flex w-full items-baseline gap-4 border-0 bg-transparent text-left cursor-pointer;
+    padding-block: 0.45rem;
+    border-bottom: 1px solid var(--soppy-divider);
+    color: var(--soppy-text-secondary);
+    font-size: var(--soppy-font-size-base);
+    font-weight: 400;
+    transition: color 0.15s ease;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      color: var(--soppy-text-primary);
+    }
+
+    .cqupt-overview__num {
+      font-variant-numeric: tabular-nums;
+      opacity: 0.7;
+    }
+
+    .cqupt-overview__title {
+      @apply min-w-0 truncate;
+    }
+
+    /* active is signalled by colour + weight only, not a size jump */
+    &.cqupt-overview__item--active {
+      color: var(--soppy-primary);
+      font-weight: 700;
+
+      .cqupt-overview__num {
+        opacity: 1;
+      }
+    }
+  }
+}

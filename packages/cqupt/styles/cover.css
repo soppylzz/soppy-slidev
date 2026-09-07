@@ -1,0 +1,25 @@
+.slidev-layout.cqupt-cover {
+  @apply relative;
+  /* reuse the shared layout padding so the progress extra pad flows in too */
+  padding: var(--soppy-layout-pad);
+
+  .cqupt-cover__body {
+    @apply w-full h-full flex-1 flex flex-col justify-center;
+    min-height: 0;
+  }
+
+  /* the footer strip is pinned to the slide bottom edge */
+  .cqupt-cover__footer {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+  }
+
+  h1 {
+    @apply text-4xl leading-20;
+  }
+
+  h1 + p {
+    @apply -mt-2 opacity-50 mb-4;
+  }
+}

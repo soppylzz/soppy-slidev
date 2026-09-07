@@ -1,0 +1,109 @@
+.cqupt-progress {
+  /* must use absolute to layout progress into ppt viewport; the height comes
+     from the component's `height` prop (inline style) so bar and extra pad match */
+  @apply absolute inset-x-0 flex flex-col;
+  z-index: 20;
+  background: color-mix(in srgb, var(--soppy-bg-raised) 82%, transparent);
+  color: var(--soppy-text-primary);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  font-family: var(--soppy-font-serif);
+
+  &.cqupt-progress--bottom {
+    bottom: 0;
+    border-top: 1px solid var(--soppy-border);
+  }
+
+  &.cqupt-progress--top {
+    top: 0;
+    border-bottom: 1px solid var(--soppy-border);
+  }
+}
+
+.cqupt-progress__main {
+  @apply flex items-center flex-1 min-h-0 px-4;
+  gap: 1rem;
+}
+
+.cqupt-progress__badge {
+  @apply shrink-0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--soppy-primary);
+}
+
+/* the section list fills the row, scrolls horizontally once items outgrow it,
+   and never squishes its items (they stretch to share space when it is ample) */
+.cqupt-progress__sections {
+  @apply flex flex-1 min-w-0 overflow-x-auto;
+  position: relative;
+  gap: 0.5rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.cqupt-progress__item {
+  @apply flex items-center rounded-full px-4 text-sm;
+  flex: 1 0 auto;
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0.65;
+  /* keep a border slot so the focus ring swaps color instead of resizing */
+  border: 1px solid transparent;
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  /* keyboard focus (Tab) is signalled by the border turning primary, not an outline */
+  &:focus-visible {
+    outline: none;
+    border-color: var(--soppy-primary);
+  }
+
+  &.cqupt-progress__item--active {
+    opacity: 1;
+    font-weight: 600;
+    background: var(--soppy-primary-soft);
+  }
+}
+
+.cqupt-progress__num {
+  @apply mr-1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+/* the fill bar sits on the anchored edge; its width eases over the slide
+   transition length so the fill visually tracks navigation */
+.cqupt-progress__bar {
+  @apply absolute inset-x-0 bottom-0;
+  height: 4px;
+  background: color-mix(in srgb, var(--soppy-text-primary) 12%, transparent);
+
+  &.cqupt-progress__bar--top {
+    bottom: auto;
+    top: 0;
+  }
+}
+
+.cqupt-progress__bar-inner {
+  height: 100%;
+  background: var(--soppy-primary);
+  transition: width 0.5s ease;
+}
+
+/* =============== glass fallback =============== */
+/* no backdrop-filter support (older Safari): the blur that separates the
+   translucent bar from busy slides is gone, so raise opacity and add a drop */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .cqupt-progress {
+    background-color: color-mix(in srgb, var(--soppy-bg-raised) 96%, transparent);
+    box-shadow: var(--soppy-shadow-sm);
+  }
+}
