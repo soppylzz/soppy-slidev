@@ -14,51 +14,11 @@ permissions:
   pull-requests: write
 
 jobs:
-  # Publish the addon / theme / shared packages with changesets when a version
-  # bump is due. Manual only — run the workflow from the Actions tab on main.
-  # Packages ship as raw TS/Vue source — no build step.
-  publish:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v7
-        with:
-          ref: main
-          fetch-depth: 0
-          fetch-tags: true
-
-      - uses: pnpm/action-setup@v6
-        with:
-          version: 11
-
-      - uses: actions/setup-node@v7
-        with:
-          node-version-file: .nvmrc
-          cache: pnpm
-
-      - name: Install deps
-        run: pnpm install
-
-      # Version via an auto PR when changesets exist, then publish + tag on the
-      # merged bump; without pending changesets this is a no-op.
-      - name: Release
-        uses: changesets/action@v1
-        with:
-          branch: main
-          title: "Changesets"
-          commit: "chore: version packages [changesets]"
-          version: pnpm run version
-          publish: pnpm run release
-          commitMode: "github-api"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
   # Build the cqupt play deck and publish it to the custom-domain GitHub Pages.
-  # The repo Pages source is "GitHub Actions", so the deploy goes through the
+  # The repo Pages source is "GitHub Actions": the site is deployed via the
   # official deploy-pages action — a push to a gh-pages branch is ignored there.
   deploy-pages:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     permissions:
@@ -109,3 +69,48 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deploy
         uses: actions/deploy-pages@v5
+
+  # Publish the addon / theme / shared packages with changesets, after the deck
+  # has deployed successfully — a broken main never reaches npm. Packages ship
+  # as raw TS/Vue source, so there is no build step. changesets/action opens a
+  # version PR when changesets are pending and releases when there are none.
+  publish:
+    needs: [deploy-pages]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Release
+        uses: changesets/action@v1
+        with:
+          branch: main
+          title: "Changesets"
+          commit: "chore: version packages [changesets]"
+          version: pnpm run version
+          publish: pnpm run release
+          commitMode: "github-api"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # changesets tags releases only in the runner — push the tags to the repo
+      - name: Push release tags
+        run: git push origin --tags
