@@ -1,0 +1,102 @@
+/* the map canvas background while tiles load/pan — ordinary background by
+   default; a special container may override it to its own surface */
+:root {
+  --soppy-map-bg: var(--soppy-bg-page);
+}
+
+.cqupt-map {
+  @apply relative w-full h-full;
+  font-family: var(--soppy-font-serif);
+  background-color: var(--soppy-map-bg);
+}
+
+.cqupt-map,
+.cqupt-map * {
+  @apply outline-none;
+}
+
+.cqupt-map__container {
+  @apply absolute inset-0;
+}
+
+.cqupt-map .leaflet-container {
+  font-family: inherit;
+  background-color: var(--soppy-map-bg);
+}
+
+.cqupt-map__error {
+  @apply grid place-content-center h-full p-6 text-center;
+  color: var(--soppy-primary);
+  font-family: var(--soppy-font-sans);
+
+  p {
+    @apply my-1;
+  }
+
+  code {
+    @apply text-[0.9em];
+    font-family: var(--soppy-font-mono);
+  }
+}
+
+/* the zoom / locate stack floats over the tiles, anchored to a corner; the
+   corner pins and the inner gap are set through the component's size */
+.cqupt-map__controls {
+  @apply absolute flex flex-col;
+  gap: var(--cqupt-map-controls-gap, 0.375rem);
+  z-index: 1000;
+
+  &.cqupt-map__controls--top-left {
+    top: var(--cqupt-map-controls-inset, 0.75rem);
+    left: var(--cqupt-map-controls-inset, 0.75rem);
+  }
+
+  &.cqupt-map__controls--top-right {
+    top: var(--cqupt-map-controls-inset, 0.75rem);
+    right: var(--cqupt-map-controls-inset, 0.75rem);
+  }
+
+  &.cqupt-map__controls--bottom-left {
+    bottom: var(--cqupt-map-controls-inset, 0.75rem);
+    left: var(--cqupt-map-controls-inset, 0.75rem);
+  }
+
+  &.cqupt-map__controls--bottom-right {
+    bottom: var(--cqupt-map-controls-inset, 0.75rem);
+    right: var(--cqupt-map-controls-inset, 0.75rem);
+  }
+}
+
+.cqupt-map__button {
+  box-shadow: var(--soppy-shadow-sm);
+}
+
+/* markers sit on the tiles: fixed skeuo ink keeps them legible on light
+   products in either mode; once the map itself renders dark, follow the theme */
+.cqupt-map__marker {
+  color: var(--soppy-skeuo-ink);
+}
+
+.cqupt-map--map-dark .cqupt-map__marker {
+  color: var(--soppy-text-primary);
+}
+
+.cqupt-map__lock {
+  @apply absolute inset-0 grid place-content-center;
+  background: rgb(0 0 0 / 0.35);
+  z-index: 1000;
+}
+
+.cqupt-map__lock-hint {
+  @apply px-4 py-2 rounded text-sm text-white;
+  background: rgb(0 0 0 / 0.6);
+}
+
+.cqupt-map__location {
+  @apply absolute w-3 h-3 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2;
+  background: var(--soppy-primary);
+  border: 2px solid var(--soppy-tone-light);
+  box-shadow: 0 0 0 2px var(--soppy-primary-ring);
+  z-index: 800;
+  pointer-events: none;
+}
