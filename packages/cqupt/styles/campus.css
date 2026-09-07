@@ -1,0 +1,33 @@
+.cqupt-campus {
+  display: block;
+  width: auto;
+
+  /* preset heights per size; medium is the base */
+  &.cqupt-campus--logo {
+    height: 3rem;
+  }
+
+  &.cqupt-campus--badge {
+    height: 2rem;
+  }
+
+  &.cqupt-campus--small {
+    &.cqupt-campus--logo {
+      height: 2.25rem;
+    }
+
+    &.cqupt-campus--badge {
+      height: 1.5rem;
+    }
+  }
+
+  &.cqupt-campus--large {
+    &.cqupt-campus--logo {
+      height: 4rem;
+    }
+
+    &.cqupt-campus--badge {
+      height: 2.75rem;
+    }
+  }
+}

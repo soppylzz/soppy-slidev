@@ -1,0 +1,21 @@
+/* fills whatever container it sits in (the jacket `#band`) with a scene image */
+/* the colour the merge mask fades into — ordinary background by default; a
+   special container (e.g. a jacket band) may override it to its own surface */
+:root {
+  --soppy-scene-bg: var(--soppy-bg-base);
+}
+
+.cqupt-scene {
+  @apply relative h-full w-full overflow-hidden;
+
+  .cqupt-scene__img {
+    @apply absolute inset-0 h-full w-full;
+    object-fit: cover;
+  }
+
+  /* edge-blend veil; the gradient itself is set inline from the merge props */
+  .cqupt-scene__merge {
+    @apply absolute inset-0;
+    pointer-events: none;
+  }
+}
