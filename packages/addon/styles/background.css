@@ -1,0 +1,22 @@
+.soppy-background {
+  /* note: set relative for content/image/css w/h-full */
+  @apply relative w-full h-full overflow-hidden;
+}
+
+.soppy-background__content {
+  @apply relative w-full h-full;
+}
+
+.soppy-background__back {
+  @apply absolute inset-0 w-full h-full;
+  background: var(--soppy-bg-page);
+}
+
+.soppy-background__image {
+  @apply w-full h-full;
+  object-fit: cover;
+}
+
+.soppy-background__css {
+  @apply w-full h-full;
+}

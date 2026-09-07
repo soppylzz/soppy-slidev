@@ -1,0 +1,206 @@
+:root {
+  --soppy-button-pad-x: 1em;
+  --soppy-button-pad-y: 0.5em;
+  --soppy-button-radius: var(--soppy-radius-md);
+  --soppy-button-gap: 0.4em;
+  --soppy-button-font-size: var(--soppy-font-size-base);
+}
+
+.soppy-button {
+  @apply inline-flex items-center justify-center select-none whitespace-nowrap cursor-pointer box-border border;
+  gap: var(--soppy-button-gap);
+  padding: var(--soppy-button-pad-y) var(--soppy-button-pad-x);
+  border-radius: var(--soppy-button-radius);
+  font-size: var(--soppy-button-font-size);
+  line-height: 1.4;
+
+  /* neutral default — the only path with no --soppy-button-c assigned */
+  color: var(--soppy-text-primary);
+  background-color: var(--soppy-fill-control);
+  border-color: var(--soppy-border);
+
+  transition:
+    background-color var(--soppy-motion-fast) ease,
+    border-color var(--soppy-motion-fast) ease,
+    color var(--soppy-motion-fast) ease,
+    box-shadow var(--soppy-motion-fast) ease;
+
+  &:hover {
+    background-color: var(--soppy-fill-hover);
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--soppy-fill-active);
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--soppy-focus-ring-width) var(--soppy-primary-ring);
+  }
+
+  &:disabled {
+    @apply opacity-50 pointer-events-none;
+  }
+
+  svg {
+    @apply flex-none;
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+  }
+
+  &.soppy-button--plain {
+    color: var(--soppy-text-primary);
+    background-color: color-mix(in srgb, var(--soppy-text-primary) 8%, transparent);
+    border-color: var(--soppy-border);
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--soppy-text-primary) 16%, transparent);
+    }
+  }
+
+  &.soppy-button--text {
+    color: var(--soppy-text-primary);
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--soppy-text-primary) 16%, transparent);
+    }
+  }
+}
+
+/* ==================== type colors ==================== */
+/* assign the single internal color; the shared block below derives every state */
+.soppy-button--primary {
+  --soppy-button-c: var(--soppy-primary);
+}
+.soppy-button--success {
+  --soppy-button-c: var(--soppy-success);
+}
+.soppy-button--warning {
+  --soppy-button-c: var(--soppy-warning);
+  --soppy-button-c-on: var(--soppy-on-warning);
+  --soppy-button-tint: var(--soppy-warning-text);
+}
+.soppy-button--danger {
+  --soppy-button-c: var(--soppy-danger);
+}
+.soppy-button--info {
+  --soppy-button-c: var(--soppy-info);
+  --soppy-button-tint: var(--soppy-info);
+}
+
+.soppy-button--primary,
+.soppy-button--success,
+.soppy-button--warning,
+.soppy-button--danger,
+.soppy-button--info {
+  color: var(--soppy-button-c-on, var(--soppy-on-solid));
+  background-color: var(--soppy-button-c);
+  border-color: transparent;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--soppy-button-c) 88%, var(--soppy-tone-light));
+  }
+
+  &:active:not(:disabled) {
+    background-color: color-mix(in srgb, var(--soppy-button-c) 82%, var(--soppy-tone-dark));
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 var(--soppy-focus-ring-width)
+      color-mix(in srgb, var(--soppy-button-c) 40%, transparent);
+  }
+
+  &.soppy-button--plain {
+    color: var(
+      --soppy-button-tint,
+      color-mix(in srgb, var(--soppy-button-c) 72%, var(--soppy-tone-dark))
+    );
+    background-color: color-mix(in srgb, var(--soppy-button-c) 9%, transparent);
+    border-color: color-mix(in srgb, var(--soppy-button-c) 45%, transparent);
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--soppy-button-c) 16%, transparent);
+    }
+  }
+
+  &.soppy-button--text {
+    color: var(
+      --soppy-button-tint,
+      color-mix(in srgb, var(--soppy-button-c) 72%, var(--soppy-tone-dark))
+    );
+    background-color: transparent;
+    border-color: transparent;
+
+    &:hover,
+    &:active {
+      background-color: color-mix(in srgb, var(--soppy-button-c) 16%, transparent);
+    }
+  }
+}
+
+/* ==================== size presets ==================== */
+/* each size overrides the shared tokens the base reads back, so label, padding
+   and (where tuned) gap all follow the size modifier */
+.soppy-button--small {
+  --soppy-button-font-size: var(--soppy-font-size-sm);
+  --soppy-button-pad-x: 0.9em;
+  --soppy-button-pad-y: 0.4em;
+}
+
+.soppy-button--large {
+  --soppy-button-font-size: var(--soppy-font-size-lg);
+  --soppy-button-pad-x: 1.15em;
+  --soppy-button-pad-y: 0.6em;
+}
+
+/* ==================== radius presets ==================== */
+.soppy-button--rounded-none {
+  border-radius: var(--soppy-radius-none);
+}
+.soppy-button--rounded-sm {
+  border-radius: var(--soppy-radius-sm);
+}
+.soppy-button--rounded-md {
+  border-radius: var(--soppy-radius-md);
+}
+.soppy-button--rounded-lg {
+  border-radius: var(--soppy-radius-lg);
+}
+.soppy-button--rounded-full {
+  border-radius: var(--soppy-radius-full);
+}
+
+/* ==================== icon appearance ==================== */
+/* the glyph is sized through --soppy-button-icon-size, set per size below (and
+   overridable per instance); the box itself stays square around it */
+.soppy-button--icon {
+  padding: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  --soppy-button-icon-size: 1.25rem;
+
+  svg {
+    fill: currentColor;
+    width: var(--soppy-button-icon-size);
+    height: var(--soppy-button-icon-size);
+  }
+}
+
+.soppy-button--icon.soppy-button--small {
+  width: 2rem;
+  height: 2rem;
+  --soppy-button-icon-size: 1rem;
+}
+
+.soppy-button--icon.soppy-button--large {
+  width: 3rem;
+  height: 3rem;
+  --soppy-button-icon-size: 1.5rem;
+}

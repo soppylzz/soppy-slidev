@@ -1,0 +1,50 @@
+.slidev-layout.soppy-cells {
+  @apply absolute inset-0 grid overflow-hidden;
+  padding: var(--soppy-layout-pad);
+
+  .soppy-cells__header {
+    grid-area: header;
+    @apply min-w-0 overflow-hidden;
+  }
+
+  .soppy-cells__cells {
+    grid-area: cells;
+    @apply grid min-h-0 min-w-0 gap-4;
+
+    .soppy-cells__cell {
+      @apply min-h-0 min-w-0 relative;
+    }
+  }
+
+  &.soppy-cells--column .soppy-cells__cells {
+    @apply grid-flow-col auto-cols-fr;
+  }
+
+  &.soppy-cells--row .soppy-cells__cells {
+    @apply grid-flow-row auto-rows-fr;
+  }
+
+  &.soppy-cells--header-top {
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "cells";
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  &.soppy-cells--header-bottom {
+    grid-template-columns: 1fr;
+    grid-template-areas: "cells" "header";
+    grid-template-rows: minmax(0, 1fr) auto;
+  }
+
+  &.soppy-cells--header-left {
+    grid-template-rows: 1fr;
+    grid-template-areas: "header cells";
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  &.soppy-cells--header-right {
+    grid-template-rows: 1fr;
+    grid-template-areas: "cells header";
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

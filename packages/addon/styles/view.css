@@ -1,0 +1,95 @@
+:root {
+  --soppy-viewer-bg: #0b0c0f;
+  --soppy-viewer-fg: #f5f5f7;
+  --soppy-viewer-fg-muted: rgb(255 255 255 / 0.55);
+  --soppy-viewer-button-bg: color-mix(in srgb, var(--soppy-tone-light) 10%, transparent);
+  --soppy-viewer-button-hover-bg: color-mix(in srgb, var(--soppy-tone-light) 18%, transparent);
+}
+
+/* ==================== slide origin ==================== */
+.soppy-view__box {
+  @apply relative w-full h-full overflow-hidden;
+}
+
+.soppy-view {
+  @apply absolute max-w-none max-h-none select-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+}
+
+.soppy-viewer-item {
+  @apply relative w-full h-full overflow-hidden;
+}
+
+.soppy-viewer-item__img {
+  @apply absolute inset-0 m-auto max-w-full max-h-full select-none;
+}
+
+.soppy-viewer-item--zoomed .soppy-viewer-item__img {
+  cursor: grab;
+}
+
+/* ==================== viewer shell ==================== */
+/* a lightbox stays dark chrome in both themes, so re-scope the component
+   tokens that normally track text/border to the viewer palette */
+.soppy-viewer {
+  @apply fixed inset-0 z-10;
+  background: var(--soppy-viewer-bg);
+
+  --soppy-carousel-swiper-bg: var(--soppy-viewer-button-bg);
+  --soppy-carousel-swiper-fg: var(--soppy-viewer-fg);
+}
+
+.soppy-viewer .soppy-button {
+  color: var(--soppy-viewer-fg);
+  background-color: var(--soppy-viewer-button-bg);
+  border-color: transparent;
+
+  &:hover {
+    background-color: var(--soppy-viewer-button-hover-bg);
+  }
+}
+
+.soppy-viewer__panel {
+  @apply absolute inset-0 flex flex-col;
+}
+
+.soppy-viewer__toolbar {
+  @apply flex items-center justify-between gap-6 px-6 py-4;
+  color: var(--soppy-viewer-fg);
+}
+
+.soppy-viewer__meta {
+  @apply min-w-0;
+}
+
+.soppy-viewer__title {
+  @apply text-lg leading-tight truncate;
+  color: var(--soppy-viewer-fg);
+}
+
+.soppy-viewer__details {
+  @apply text-sm opacity-70 truncate;
+  color: var(--soppy-viewer-fg-muted);
+}
+
+.soppy-viewer__actions {
+  @apply flex items-center gap-2 shrink-0;
+}
+
+.soppy-viewer__counter {
+  @apply text-sm tabular-nums mr-2;
+  color: var(--soppy-viewer-fg-muted);
+}
+
+.soppy-viewer__stage {
+  @apply relative flex-1 min-h-0;
+}
+
+/* the flight element: fixed, centre-origin, sized per run by viewFly.activate */
+.soppy-view-fly {
+  @apply fixed left-0 top-0 pointer-events-none select-none;
+  z-index: 9;
+  visibility: hidden;
+  opacity: 0;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}

@@ -1,0 +1,90 @@
+/* a rich link-preview card teleported and positioned by usePopover */
+.soppy-preview__trigger {
+  display: inline-block;
+}
+
+.soppy-preview__card {
+  @apply fixed z-[1000] overflow-hidden;
+  border-radius: var(--soppy-radius-lg);
+  width: var(--soppy-preview-width, 18rem);
+  background: var(--soppy-bg-raised);
+  color: var(--soppy-text-primary);
+  border: 1px solid var(--soppy-border);
+  box-shadow: var(--soppy-shadow-md);
+}
+
+.soppy-preview__meta {
+  @apply px-3 py-2;
+}
+
+.soppy-preview__title {
+  @apply text-sm font-medium truncate;
+}
+
+.soppy-preview__desc {
+  @apply text-xs opacity-70 line-clamp-2;
+}
+
+.soppy-preview__media {
+  @apply relative w-full overflow-hidden aspect-[16/10] cursor-pointer;
+  background: var(--soppy-bg-raised);
+}
+
+.soppy-preview__img {
+  @apply absolute inset-0 w-full h-full;
+  cursor: pointer;
+}
+
+/* the frame is oversized so its own scrollbars stay outside the clip; the
+   preview stays inert — opening the link is the only interaction */
+.soppy-preview__iframe {
+  display: block;
+  border: 0;
+  pointer-events: none;
+  width: calc(100% + 0.9rem);
+  height: calc(100% + 0.9rem);
+}
+
+/* the frost layer is a persistent non-interactive mask over the media; hovering
+   only fades it so the live frame shows through — it never becomes scrollable */
+.soppy-preview__glass {
+  @apply absolute inset-0 flex items-end justify-end;
+  padding: 0.5rem;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--soppy-tone-light) 8%, transparent);
+  backdrop-filter: blur(3px) saturate(1.1);
+  -webkit-backdrop-filter: blur(3px) saturate(1.1);
+  transition: opacity var(--soppy-fade-dur, 0.2s) ease;
+  will-change: opacity;
+
+  &--hidden {
+    opacity: 0;
+  }
+}
+
+.soppy-preview__open {
+  @apply px-2 py-1 text-xs pointer-events-none;
+  border-radius: var(--soppy-radius-sm);
+  background: color-mix(in srgb, var(--soppy-tone-dark) 55%, transparent);
+  color: var(--soppy-text-invert);
+}
+
+.soppy-preview__status {
+  @apply absolute inset-0 flex items-center justify-center text-xs;
+  background: var(--soppy-bg-raised);
+  pointer-events: none;
+}
+
+button.soppy-preview__status {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.soppy-preview__foot {
+  @apply flex items-center justify-end px-3 py-1;
+  border-top: 1px solid var(--soppy-border);
+}
+
+.soppy-preview__origin {
+  @apply text-xs opacity-70 truncate;
+}

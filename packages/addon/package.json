@@ -1,0 +1,21 @@
+{
+  "name": "@soppy-slidev/addon",
+  "version": "0.0.0",
+  "type": "module",
+  "dependencies": {
+    "@soppy-slidev/shared": "workspace:*",
+    "@vueuse/core": "catalog:",
+    "lodash-es": "catalog:",
+    "pinia": "catalog:",
+    "gsap": "catalog:"
+  },
+  "peerDependencies": {
+    "vue": "catalog:",
+    "@slidev/cli": "catalog:",
+    "@slidev/client": "catalog:",
+    "@slidev/types": "catalog:"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "catalog:"
+  }
+}

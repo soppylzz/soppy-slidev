@@ -1,0 +1,50 @@
+/* Derived color steps per type, computed from palette.css bases. They need no
+   dark block: the bases they reference flip under html.dark and re-derive. */
+:root {
+  --soppy-on-solid: var(--soppy-tone-light);
+
+  --soppy-primary-hover: color-mix(in srgb, var(--soppy-primary) 88%, var(--soppy-tone-light));
+  --soppy-primary-active: color-mix(in srgb, var(--soppy-primary) 82%, var(--soppy-tone-dark));
+  --soppy-primary-soft: color-mix(in srgb, var(--soppy-primary) 9%, transparent);
+  --soppy-primary-soft-hover: color-mix(in srgb, var(--soppy-primary) 16%, transparent);
+  --soppy-primary-border: color-mix(in srgb, var(--soppy-primary) 45%, transparent);
+  --soppy-primary-ring: color-mix(in srgb, var(--soppy-primary) 40%, transparent);
+  --soppy-primary-text: color-mix(in srgb, var(--soppy-primary) 72%, var(--soppy-tone-dark));
+  --soppy-on-primary: var(--soppy-on-solid);
+
+  --soppy-success-hover: color-mix(in srgb, var(--soppy-success) 88%, var(--soppy-tone-light));
+  --soppy-success-active: color-mix(in srgb, var(--soppy-success) 82%, var(--soppy-tone-dark));
+  --soppy-success-soft: color-mix(in srgb, var(--soppy-success) 9%, transparent);
+  --soppy-success-soft-hover: color-mix(in srgb, var(--soppy-success) 16%, transparent);
+  --soppy-success-border: color-mix(in srgb, var(--soppy-success) 45%, transparent);
+  --soppy-success-ring: color-mix(in srgb, var(--soppy-success) 40%, transparent);
+  --soppy-success-text: color-mix(in srgb, var(--soppy-success) 72%, var(--soppy-tone-dark));
+  --soppy-on-success: var(--soppy-on-solid);
+
+  --soppy-warning-hover: color-mix(in srgb, var(--soppy-warning) 88%, var(--soppy-tone-light));
+  --soppy-warning-active: color-mix(in srgb, var(--soppy-warning) 82%, var(--soppy-tone-dark));
+  --soppy-warning-soft: color-mix(in srgb, var(--soppy-warning) 9%, transparent);
+  --soppy-warning-soft-hover: color-mix(in srgb, var(--soppy-warning) 16%, transparent);
+  --soppy-warning-border: color-mix(in srgb, var(--soppy-warning) 45%, transparent);
+  --soppy-warning-ring: color-mix(in srgb, var(--soppy-warning) 40%, transparent);
+  --soppy-warning-text: color-mix(in srgb, var(--soppy-warning) 82%, var(--soppy-tone-dark));
+  --soppy-on-warning: var(--soppy-tone-dark);
+
+  --soppy-danger-hover: color-mix(in srgb, var(--soppy-danger) 88%, var(--soppy-tone-light));
+  --soppy-danger-active: color-mix(in srgb, var(--soppy-danger) 82%, var(--soppy-tone-dark));
+  --soppy-danger-soft: color-mix(in srgb, var(--soppy-danger) 9%, transparent);
+  --soppy-danger-soft-hover: color-mix(in srgb, var(--soppy-danger) 16%, transparent);
+  --soppy-danger-border: color-mix(in srgb, var(--soppy-danger) 45%, transparent);
+  --soppy-danger-ring: color-mix(in srgb, var(--soppy-danger) 40%, transparent);
+  --soppy-danger-text: color-mix(in srgb, var(--soppy-danger) 72%, var(--soppy-tone-dark));
+  --soppy-on-danger: var(--soppy-on-solid);
+
+  --soppy-info-hover: color-mix(in srgb, var(--soppy-info) 88%, var(--soppy-tone-light));
+  --soppy-info-active: color-mix(in srgb, var(--soppy-info) 82%, var(--soppy-tone-dark));
+  --soppy-info-soft: color-mix(in srgb, var(--soppy-info) 9%, transparent);
+  --soppy-info-soft-hover: color-mix(in srgb, var(--soppy-info) 16%, transparent);
+  --soppy-info-border: color-mix(in srgb, var(--soppy-info) 45%, transparent);
+  --soppy-info-ring: color-mix(in srgb, var(--soppy-info) 40%, transparent);
+  --soppy-info-text: var(--soppy-info);
+  --soppy-on-info: var(--soppy-on-solid);
+}

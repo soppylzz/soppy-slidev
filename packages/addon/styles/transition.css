@@ -1,0 +1,10 @@
+.soppy-opacity-enter-active,
+.soppy-opacity-leave-active {
+  transition: opacity var(--soppy-fade-dur) ease;
+  will-change: opacity;
+}
+
+.soppy-opacity-enter-from,
+.soppy-opacity-leave-to {
+  opacity: 0;
+}

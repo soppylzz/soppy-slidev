@@ -1,0 +1,65 @@
+/* Color primitives: mix tones, type/brand bases, neutral ramp and the shared
+   surface roles built from them. Derived color-mix() steps live in derived.css. */
+:root {
+  --soppy-tone-light: #ffffff;
+  --soppy-tone-dark: #000000;
+
+  /* =============== type bases =============== */
+  --soppy-primary: #1677ff;
+  --soppy-success: #52c41a;
+  --soppy-warning: #faad14;
+  --soppy-danger: #ff4d4f;
+  --soppy-info: #909399;
+
+  /* =============== neutrals =============== */
+  --soppy-bg-page: #f6f8fa;
+  --soppy-bg-base: #ffffff;
+  --soppy-bg-raised: #ffffff;
+  --soppy-fill-control: #ffffff;
+  --soppy-fill-hover: color-mix(in srgb, var(--soppy-bg-base) 94%, var(--soppy-tone-dark));
+  --soppy-fill-active: color-mix(in srgb, var(--soppy-bg-base) 90%, var(--soppy-tone-dark));
+  --soppy-fill-soft: color-mix(in srgb, var(--soppy-bg-base) 96%, var(--soppy-tone-dark));
+
+  --soppy-text-primary: rgb(0 0 0 / 0.88);
+  --soppy-text-secondary: rgb(0 0 0 / 0.62);
+  --soppy-text-tertiary: rgb(0 0 0 / 0.45);
+  --soppy-text-disabled: rgb(0 0 0 / 0.25);
+  --soppy-text-invert: var(--soppy-tone-light);
+
+  --soppy-border: rgb(0 0 0 / 0.12);
+  --soppy-border-strong: rgb(0 0 0 / 0.2);
+  --soppy-divider: rgb(0 0 0 / 0.06);
+
+  /* =============== shared caption =============== */
+  --soppy-caption-color: var(--soppy-text-secondary);
+  --soppy-caption-size: 0.95em;
+
+  /* skeuo paper (note / photo) ink stays dark in both themes */
+  --soppy-skeuo-ink: #3c3631;
+}
+
+/* only bases + neutrals flip; derived color-mix() steps re-derive */
+html.dark {
+  --soppy-primary: #3b8cff;
+  --soppy-success: #73d13d;
+  --soppy-warning: #ffc53d;
+  --soppy-danger: #ff7875;
+  --soppy-info: #a6aab0;
+
+  --soppy-bg-page: #0f1115;
+  --soppy-bg-base: #1b1e24;
+  --soppy-bg-raised: #24282f;
+  --soppy-fill-control: #24282f;
+  --soppy-fill-hover: color-mix(in srgb, var(--soppy-bg-base) 92%, var(--soppy-tone-light));
+  --soppy-fill-active: color-mix(in srgb, var(--soppy-bg-base) 86%, var(--soppy-tone-light));
+  --soppy-fill-soft: color-mix(in srgb, var(--soppy-bg-base) 90%, var(--soppy-tone-light));
+
+  --soppy-text-primary: rgb(255 255 255 / 0.88);
+  --soppy-text-secondary: rgb(255 255 255 / 0.62);
+  --soppy-text-tertiary: rgb(255 255 255 / 0.45);
+  --soppy-text-disabled: rgb(255 255 255 / 0.25);
+
+  --soppy-border: rgb(255 255 255 / 0.16);
+  --soppy-border-strong: rgb(255 255 255 / 0.28);
+  --soppy-divider: rgb(255 255 255 / 0.08);
+}

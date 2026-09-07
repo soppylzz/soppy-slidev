@@ -1,0 +1,50 @@
+.slidev-layout {
+  @apply w-full h-full p-0 m-0;
+  font-family: var(--soppy-font-sans);
+  font-size: var(--soppy-font-size-base);
+  /* dark-safe default text — a theme may repaint by overriding .slidev-layout color */
+  color: var(--soppy-text-primary);
+  padding: var(--soppy-layout-pad);
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--soppy-font-serif);
+    color: inherit;
+  }
+
+  h1 {
+    font-size: var(--soppy-font-size-3xl);
+    font-weight: var(--soppy-font-weight-semibold);
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+  h2 {
+    font-size: var(--soppy-font-size-2xl);
+    font-weight: var(--soppy-font-weight-semibold);
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+  h3 {
+    font-size: var(--soppy-font-size-xl);
+    font-weight: var(--soppy-font-weight-semibold);
+  }
+  h4 {
+    font-size: var(--soppy-font-size-lg);
+    font-weight: var(--soppy-font-weight-medium);
+  }
+  h5 {
+    font-size: var(--soppy-font-size-base);
+    font-weight: var(--soppy-font-weight-medium);
+  }
+  h6 {
+    font-size: var(--soppy-font-size-sm);
+    font-weight: var(--soppy-font-weight-medium);
+    padding-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}

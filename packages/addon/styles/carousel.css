@@ -1,0 +1,144 @@
+:root {
+  --soppy-carousel-dot-size: 0.5rem;
+  --soppy-carousel-dot-active-width: 1.25rem;
+  --soppy-carousel-dot-gap: 0.5rem;
+  --soppy-carousel-swiper-bg: color-mix(in srgb, var(--soppy-bg-raised) 78%, transparent);
+  --soppy-carousel-swiper-fg: var(--soppy-text-primary);
+  /* idle dot shares the swiper glass; active uses the brand color as highlight */
+  --soppy-carousel-dot-idle: var(--soppy-carousel-swiper-bg);
+  --soppy-carousel-dot-active: var(--soppy-primary);
+  --soppy-carousel-dot-ring: var(--soppy-primary-ring);
+}
+
+.soppy-carousel {
+  @apply w-full h-full;
+
+  .soppy-carousel__viewport {
+    @apply relative w-full h-full overflow-hidden;
+  }
+
+  .soppy-carousel__track {
+    will-change: transform;
+  }
+
+  .soppy-carousel__item {
+    @apply flex-shrink-0;
+  }
+
+  /* the arrow buttons keep their placement here and get a frosted glass pill;
+     the glyph/layout (icon, size, rounded) comes from <Button> */
+  .soppy-carousel__swiper {
+    @apply absolute z-10;
+    color: var(--soppy-carousel-swiper-fg);
+    background-color: var(--soppy-carousel-swiper-bg);
+    border-color: transparent;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--soppy-carousel-swiper-fg) 12%,
+        var(--soppy-carousel-swiper-bg)
+      );
+    }
+  }
+
+  .soppy-carousel__indicator {
+    @apply absolute z-10 justify-center;
+    gap: var(--soppy-carousel-dot-gap);
+  }
+
+  /* =============== indicator dots =============== */
+  .soppy-carousel__dot {
+    @apply p-0 cursor-pointer;
+    box-sizing: border-box;
+    width: var(--soppy-carousel-dot-size);
+    height: var(--soppy-carousel-dot-size);
+    border: 0;
+    border-radius: var(--soppy-radius-full);
+    background: var(--soppy-carousel-dot-idle);
+    /* hairline in the accent color keeps the idle glass pip visible on media */
+    box-shadow: inset 0 0 0 1px
+      color-mix(in srgb, var(--soppy-carousel-dot-active) 30%, transparent);
+    transition:
+      width var(--soppy-motion-base) ease,
+      background-color var(--soppy-motion-fast) ease;
+
+    &:hover {
+      background: var(--soppy-carousel-dot-active);
+    }
+  }
+
+  .soppy-carousel__dot--active {
+    width: var(--soppy-carousel-dot-active-width);
+    background: var(--soppy-carousel-dot-active);
+  }
+
+  .soppy-carousel__dot:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--soppy-focus-ring-width) var(--soppy-carousel-dot-ring);
+  }
+
+  /* =============== integration =============== */
+  &.soppy-carousel--row {
+    .soppy-carousel__track {
+      @apply flex h-full;
+    }
+
+    .soppy-carousel__item {
+      width: calc(100% + 2px);
+    }
+    .soppy-carousel__swiper--prev {
+      @apply top-1/2 -translate-y-1/2;
+      left: var(--soppy-swiper-gap);
+    }
+    .soppy-carousel__swiper--next {
+      @apply top-1/2 -translate-y-1/2;
+      right: var(--soppy-swiper-gap);
+    }
+
+    .soppy-carousel__indicator {
+      @apply flex inset-x-0;
+
+      &.soppy-carousel__indicator--start {
+        top: var(--soppy-indicator-gap);
+      }
+
+      &.soppy-carousel__indicator--end {
+        bottom: var(--soppy-indicator-gap);
+      }
+    }
+  }
+
+  &.soppy-carousel--column {
+    .soppy-carousel__track {
+      @apply flex-col h-full;
+    }
+
+    .soppy-carousel__item {
+      height: calc(100% + 2px);
+    }
+
+    .soppy-carousel__swiper--prev {
+      @apply left-1/2 -translate-x-1/2;
+      top: var(--soppy-swiper-gap);
+    }
+    .soppy-carousel__swiper--next {
+      @apply left-1/2 -translate-x-1/2;
+      bottom: var(--soppy-swiper-gap);
+    }
+
+    .soppy-carousel__indicator {
+      @apply flex-col inset-y-0;
+
+      &.soppy-carousel__indicator--start {
+        left: var(--soppy-indicator-gap);
+      }
+
+      &.soppy-carousel__indicator--end {
+        right: var(--soppy-indicator-gap);
+      }
+    }
+  }
+}

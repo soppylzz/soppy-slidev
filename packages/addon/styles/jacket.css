@@ -1,0 +1,42 @@
+.slidev-layout.soppy-jacket {
+  @apply absolute inset-0 overflow-hidden flex p-0;
+
+  .soppy-jacket__band {
+    @apply shrink-0;
+    background: var(--soppy-bg-base);
+  }
+  /* =============== section mode =============== */
+  &.soppy-jacket--section {
+    @apply items-center;
+
+    .soppy-jacket__band {
+      @apply w-full py-2rem;
+      box-shadow: var(--soppy-shadow-sm);
+      margin-block: var(--soppy-inline-minor-pad);
+      border-block: 1px solid var(--soppy-border);
+    }
+  }
+  /* =============== side mode =============== */
+  &.soppy-jacket--left,
+  &.soppy-jacket--right {
+    .soppy-jacket__band {
+      @apply h-full;
+      box-shadow: var(--soppy-shadow-sm);
+      margin-inline: var(--soppy-inline-minor-pad);
+      border-inline: 1px solid var(--soppy-border);
+    }
+
+    .soppy-jacket__content {
+      padding: var(--soppy-layout-minor-pad);
+      @apply flex-1 min-w-0 overflow-hidden;
+    }
+  }
+
+  &.soppy-jacket--left {
+    @apply flex-row-reverse;
+  }
+
+  &.soppy-jacket--right {
+    @apply flex-row;
+  }
+}

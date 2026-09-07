@@ -1,0 +1,84 @@
+:root {
+  --soppy-decor-tape-thickness: 1.1rem;
+  --soppy-decor-tape-radius: var(--soppy-radius-xs);
+  --soppy-decor-tape-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
+  --soppy-decor-pin-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.72), inset 0 -1.5px 2px rgb(0 0 0 / 0.18),
+    inset 1px 0 1px rgb(255 255 255 / 0.12), 0 1px 2px rgb(0 0 0 / 0.16),
+    0 3px 6px rgb(0 0 0 / 0.08);
+
+  --soppy-decor-tape-w-sm: 4rem;
+  --soppy-decor-tape-w-md: 7rem;
+  --soppy-decor-tape-w-lg: 10rem;
+
+  --soppy-decor-pin-d-sm: 0.875rem;
+  --soppy-decor-pin-d-md: 1.25rem;
+  --soppy-decor-pin-d-lg: 1.75rem;
+}
+
+.soppy-decor {
+  @apply relative inline-block;
+}
+
+/* width/`--soppy-decor-color` arrive inline for custom lengths;
+   preset sizes come from the `__size--*` modifiers below */
+.soppy-decor__kind {
+  @apply absolute left-1/2 top-0 pointer-events-none;
+}
+
+.soppy-decor__kind--tape {
+  height: var(--soppy-decor-tape-thickness);
+  border-radius: var(--soppy-decor-tape-radius);
+
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--soppy-tone-light) 35%, transparent),
+      transparent 55%
+    ),
+    color-mix(in srgb, var(--soppy-decor-color) 55%, transparent);
+  box-shadow: var(--soppy-decor-tape-shadow);
+
+  &.soppy-decor__size--small {
+    width: var(--soppy-decor-tape-w-sm);
+  }
+  &.soppy-decor__size--medium {
+    width: var(--soppy-decor-tape-w-md);
+  }
+  &.soppy-decor__size--large {
+    width: var(--soppy-decor-tape-w-lg);
+  }
+}
+
+.soppy-decor__kind--pin {
+  border-radius: var(--soppy-radius-full);
+
+  background:
+    radial-gradient(
+      ellipse at 31% 24%,
+      color-mix(in srgb, var(--soppy-tone-light) 82%, transparent) 0%,
+      color-mix(in srgb, var(--soppy-tone-light) 32%, transparent) 18%,
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 48% 43%,
+      color-mix(in srgb, var(--soppy-decor-color), var(--soppy-tone-light) 8%) 0%,
+      var(--soppy-decor-color) 52%,
+      color-mix(in srgb, var(--soppy-decor-color), var(--soppy-tone-dark) 20%) 100%
+    );
+
+  box-shadow: var(--soppy-decor-pin-shadow);
+
+  &.soppy-decor__size--small {
+    width: var(--soppy-decor-pin-d-sm);
+    height: var(--soppy-decor-pin-d-sm);
+  }
+  &.soppy-decor__size--medium {
+    width: var(--soppy-decor-pin-d-md);
+    height: var(--soppy-decor-pin-d-md);
+  }
+  &.soppy-decor__size--large {
+    width: var(--soppy-decor-pin-d-lg);
+    height: var(--soppy-decor-pin-d-lg);
+  }
+}
