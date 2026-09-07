@@ -86,6 +86,13 @@ jobs:
       - name: Install deps
         run: pnpm install
 
+      # the deck reads its MapTiler key from plays/cqupt/.env (gitignored);
+      # feed it from the repo secret so the deployed build has tiles
+      - name: Write deck env
+        run: printf 'VITE_API_KEY=%s\n' "$VITE_API_KEY" > plays/cqupt/.env
+        env:
+          VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+
       # custom domain on the repo Pages: content lives at the domain root, so
       # Slidev's default base "/" and its absolute asset paths stay correct
       - name: Build play
