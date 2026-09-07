@@ -55,9 +55,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   # Build the cqupt play deck and publish it to the custom-domain GitHub Pages.
+  # The repo Pages source is "GitHub Actions", so the deploy goes through the
+  # official deploy-pages action — a push to a gh-pages branch is ignored there.
   deploy-pages:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+
     steps:
       - uses: actions/checkout@v7
         with:
@@ -75,17 +86,19 @@ jobs:
       - name: Install deps
         run: pnpm install
 
+      # custom domain on the repo Pages: content lives at the domain root, so
+      # Slidev's default base "/" and its absolute asset paths stay correct
       - name: Build play
         run: pnpm build:cqupt
 
-      # custom domain on the repo Pages: deploy to the domain root, so Slidev's
-      # default base "/" and its absolute asset paths stay correct
-      - name: Write CNAME
-        run: echo "slidev.soppylzz.com" > plays/cqupt/dist/CNAME
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: plays/cqupt/dist
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: plays/cqupt/dist
-          publish_branch: gh-pages
+        id: deploy
+        uses: actions/deploy-pages@v5
