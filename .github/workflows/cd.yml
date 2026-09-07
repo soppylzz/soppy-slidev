@@ -113,8 +113,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # changesets/action@v2 creates tags/releases through the GitHub API; pushing
-      # the runner's local tags is a fallback in case that path is skipped.
-      - name: Push release tags
-        run: git push origin --tags
