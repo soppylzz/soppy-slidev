@@ -67,7 +67,7 @@ jobs:
       # custom domain on the repo Pages: deploy to the domain root, so Slidev's
       # default base "/" and its absolute asset paths stay correct
       - name: Write CNAME
-        run: echo "cqupt.soppylzz.com" > plays/cqupt/dist/CNAME
+        run: echo "slidev.soppylzz.com" > plays/cqupt/dist/CNAME
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
