@@ -1,45 +1,55 @@
-name: CD
+name: cd
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+concurrency:
+  group: cd
+  cancel-in-progress: false
+
 permissions:
   contents: write
-
-concurrency:
-  group: cd-${{ github.ref }}
-  cancel-in-progress: true
+  pull-requests: write
 
 jobs:
-  # Publish the addon / theme packages with changesets when a version bump is due.
-  # Packages ship as raw TS/Vue source — no build step, publish as-is.
+  # Publish the addon / theme / shared packages with changesets when a version
+  # bump is due. Packages ship as raw TS/Vue source — no build step.
   publish:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+          fetch-tags: true
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 11
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install deps
+        run: pnpm install
 
-      # Creates a versioning PR when changesets exist, and runs `publish` after
-      # the bump lands; without pending changesets it is a no-op.
+      # Version via an auto PR when changesets exist, then publish + tag on the
+      # merged bump; without pending changesets this is a no-op.
       - name: Release
         uses: changesets/action@v1
         with:
-          version: pnpm version
-          publish: pnpm release
+          branch: main
+          title: "Changesets"
+          commit: "chore: version packages [changesets]"
+          version: pnpm run version
+          publish: pnpm run release
+          commitMode: "github-api"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -49,20 +59,24 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+        with:
+          ref: main
 
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 11
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install deps
+        run: pnpm install
 
-      - run: pnpm build:cqupt
+      - name: Build play
+        run: pnpm build:cqupt
 
       # custom domain on the repo Pages: deploy to the domain root, so Slidev's
       # default base "/" and its absolute asset paths stay correct
