@@ -90,10 +90,15 @@ jobs:
         with:
           version: 11
 
+      # npm needs registry auth for changeset publish — changesets/action@v2 does
+      # not write ~/.npmrc the way v1 did, so hand the token to setup-node.
       - uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: pnpm
+          registry-url: https://registry.npmjs.org
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Install deps
         run: pnpm install
